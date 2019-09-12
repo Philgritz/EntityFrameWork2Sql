@@ -8,6 +8,11 @@ namespace EntityFrameWork2SqlLibrary1 {
     class RequestRepository {
 
         private static PRSContext context = new PRSContext();
+        public static string RequestNew = "NEW";  //simply strings to pass into pararmeter. better to create and use variable than to hard code
+        public static string RequestEdit = "EDIT";
+        public static string RequestReview = "REVIEW";
+        public static string RequestApproved = "APPROVED";
+        public static string RequestRejected = "REJECTED";
 
         public static List<Request> GetAll() {
             return context.Request.ToList();
@@ -45,10 +50,26 @@ namespace EntityFrameWork2SqlLibrary1 {
             return context.SaveChanges() == 1;
         }
         public static bool Delete(int id) {
-            var request = context.Request.Find(id);
-            if (request == null) { return false; }
-            var rc = Delete(request);  //use other delete method
+            var request = context.Request.Find(id);           
+            var rc = Delete(request);  //uses other delete method by calling it. other method already checked for null. not needed here
             return rc;
+        }
+        public static void Review(int id) {
+            SetStatus(id, RequestReview);
+        }
+        public static void Approve(int id) {
+            SetStatus(id, RequestApproved);
+        }
+        public static void Reject(int id) {
+            SetStatus(id, RequestRejected);
+        }
+        private static void SetStatus(int id, string status) {
+            var request = GetByPk(id);
+            if(request == null) { throw new Exception("No request with that id"); }
+            request.Status = status;
+            var success = Update(request);
+            if (!success) { throw new Exception("Request update failed!"); }
+            
         }
     }
 }

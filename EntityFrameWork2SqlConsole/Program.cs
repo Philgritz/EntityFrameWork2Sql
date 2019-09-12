@@ -52,9 +52,9 @@ namespace EntityFrameWork2SqlConsole {
                 //context.Request.Remove(dbRequest);
                 //context.SaveChanges();  //adds changes to the db
 
-                //var Nike = context.Vendors.Find(3); //.Find is same as get by pk
+                var Nike = context.Vendors.Find(1); //.Find is same as get by pk
 
-                //Console.WriteLine($"{Nike.Code} {Nike.Name}");
+                Console.WriteLine($"{Nike.Code} {Nike.Name}");
 
                 ////var users = context.Users.ToList();      //create collection instance of user data
                 //var users = from u in context.Users.ToList()
