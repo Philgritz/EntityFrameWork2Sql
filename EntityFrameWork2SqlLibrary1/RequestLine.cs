@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace EntityFrameWork2SqlLibrary1
-{
-    public partial class RequestLine
-    {
+namespace EntityFrameWork2SqlLibrary1 {
+    public partial class RequestLine {
         public int Id { get; set; }
         public int RequestId { get; set; }
         public int ProductId { get; set; }
